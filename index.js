@@ -57,7 +57,7 @@ async function checkPortfolio() {
   const symbols = Object.keys(portfolio);
   const quotes = await fetchQuotes(symbols, currency);
 
-  const worth = Object.entries(portfolio).map((sum, [symbol, amount]) => {
+  const worth = Object.entries(portfolio).reduce((sum, [symbol, amount]) => {
     const price = quotes.data[symbol].quote[currency].price;
     return sum + price * amount;
   }, 0);
